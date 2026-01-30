@@ -2,18 +2,26 @@ services:
   - type: web
     name: veggo-api
     env: python
-    buildCommand: pip install -r requirements.txt
+    pythonVersion: 3.11.9
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
     startCommand: uvicorn veggo_app:app --host 0.0.0.0 --port $PORT
+
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
       - key: MONGODB_URI
         sync: false
+
       - key: JWT_SECRET
         generateValue: true
+
       - key: BASE_URL
-        value: https://veggo-api.onrender.com
+        value: https://veggo-system.onrender.com
+
       - key: WAREHOUSE_LAT
-        value: 40.7128
+        value: "40.7128"
+
       - key: WAREHOUSE_LNG
-        value: -74.0060
+        value: "-74.0060"
